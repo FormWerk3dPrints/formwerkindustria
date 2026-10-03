@@ -27,13 +27,13 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pt-BR"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <ScrollContext>
         <Header />
-        <main className="flex-1 pt-[104px]">{children}</main>
+        <main className="flex-1 pt-[var(--header-height)]">{children}</main>
         </ScrollContext>
         <Footer />
       </body>

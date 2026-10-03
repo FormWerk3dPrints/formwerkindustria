@@ -8,6 +8,7 @@
  */
 
 import { useState } from "react";
+import { buttonClasses } from "@/components/ui/button";
 
 interface FormState {
   name: string;
@@ -46,11 +47,11 @@ function InputField({
 }) {
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="text-sm font-medium text-gray-700">
+      <label htmlFor={id} className="text-sm font-medium text-ink">
         {label}
-        {required && <span className="text-red-500 ml-0.5">*</span>}
+        {required && <span className="text-danger ml-0.5" aria-hidden="true">*</span>}
         {!required && (
-          <span className="ml-1.5 text-xs font-normal text-gray-400">(opcional)</span>
+          <span className="ml-1.5 text-xs font-normal text-ink-subtle">(opcional)</span>
         )}
       </label>
       <input
@@ -63,7 +64,7 @@ function InputField({
         placeholder={placeholder}
         disabled={disabled}
         autoComplete={id === "email" ? "email" : id === "phone" ? "tel" : "on"}
-        className="w-full rounded-md border border-gray-300 bg-[#fff8f2] px-3.5 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-gray-900 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
+        className="w-full rounded-md border border-border-strong bg-surface-0 px-3.5 py-2.5 text-sm text-ink placeholder:text-ink-subtle shadow-sm transition-[border-color,box-shadow] focus:outline-none focus:border-ink focus:shadow-[0_0_0_3px_var(--accent-tint),0_0_0_1px_var(--focus-ring)] disabled:bg-surface-100 disabled:text-ink-subtle disabled:cursor-not-allowed"
       />
     </div>
   );
@@ -116,19 +117,19 @@ export default function ContactForm() {
   return (
     <div className="w-full max-w-lg mx-auto">
       {status === "success" ? (
-          <div className="rounded-xl border border-green-200 bg-green-50 p-8 text-center">
-          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-            <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <div className="rounded-xl border border-success bg-success-tint p-8 text-center" role="status">
+          <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-surface-0">
+            <svg className="h-6 w-6 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h3 className="text-lg font-semibold text-green-800 mb-1">Mensagem recebida!</h3>
-          <p className="text-sm text-green-700">
+          <h3 className="text-lg font-semibold text-success mb-1">Mensagem recebida!</h3>
+          <p className="text-sm text-ink-muted">
             Obrigado pelo contato. Retornaremos em breve.
           </p>
           <button
             onClick={() => setStatus("idle")}
-            className="mt-5 text-sm text-green-700 underline underline-offset-2 hover:text-green-900 transition-colors"
+            className="mt-5 text-sm text-ink underline underline-offset-2 decoration-accent hover:text-accent-ink transition-colors"
           >
             Enviar outra mensagem
           </button>
@@ -174,7 +175,7 @@ export default function ContactForm() {
           />
 
           {status === "error" && (
-            <div className="rounded-md bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+            <div className="rounded-md bg-danger-tint border border-danger px-4 py-3 text-sm text-danger" role="alert">
               {errorMsg}
             </div>
           )}
@@ -182,9 +183,8 @@ export default function ContactForm() {
           <button
             type="submit"
             disabled={isLoading}
-            className="mt-1 w-full rounded-md px-4 py-3 text-sm font-semibold text-[#fff8f2]
-                       shadow-sm bg-gray-600 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-orange-200
-                       disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-200 transform"
+            aria-busy={isLoading || undefined}
+            className={buttonClasses("primary", "md", "mt-1 w-full")}
           >
             {isLoading ? (
               <span className="flex items-center justify-center gap-2">
@@ -199,7 +199,7 @@ export default function ContactForm() {
             )}
           </button>
 
-          <p className="text-center text-xs text-gray-400">
+          <p className="text-center text-xs text-ink-subtle">
             Seus dados são armazenados de forma criptografada e protegida.
           </p>
         </form>

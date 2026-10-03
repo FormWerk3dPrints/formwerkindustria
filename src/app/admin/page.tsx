@@ -17,6 +17,7 @@ import {
   onAuthStateChanged,
   type User,
 } from "firebase/auth";
+import { buttonClasses } from "@/components/ui/button";
 
 /* ─── Tipos ──────────────────────────────────────────────────────────────── */
 
@@ -50,16 +51,16 @@ function formatDate(iso: string | null) {
 function ContactsTable({ contacts }: { contacts: Contact[] }) {
   if (contacts.length === 0) {
     return (
-      <p className="text-center text-gray-400 py-16 text-sm">
+      <p className="text-center text-ink-subtle py-16 text-sm">
         Nenhum contato cadastrado ainda.
       </p>
     );
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
+    <div className="overflow-x-auto rounded-xl border border-border shadow-sm">
       <table className="w-full text-sm text-left">
-        <thead className="bg-gray-50 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+        <thead className="bg-surface-100 font-mono text-xs font-medium text-ink-subtle uppercase tracking-[0.12em]">
           <tr>
             <th className="px-5 py-3.5">Nome</th>
             <th className="px-5 py-3.5">E-mail</th>
@@ -68,14 +69,14 @@ function ContactsTable({ contacts }: { contacts: Contact[] }) {
             <th className="px-5 py-3.5 whitespace-nowrap">Data</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100 bg-[#fff8f2]">
+        <tbody className="divide-y divide-border bg-surface-0">
           {contacts.map((c) => (
-            <tr key={c.id} className="hover:bg-gray-50 transition-colors">
-              <td className="px-5 py-4 font-medium text-gray-900 whitespace-nowrap">{c.name}</td>
-              <td className="px-5 py-4 text-gray-600">{c.email}</td>
-              <td className="px-5 py-4 text-gray-600 whitespace-nowrap">{c.phone}</td>
-              <td className="px-5 py-4 text-gray-600">{c.institution ?? "—"}</td>
-              <td className="px-5 py-4 text-gray-400 whitespace-nowrap text-xs">
+            <tr key={c.id} className="hover:bg-surface-100 transition-colors">
+              <td className="px-5 py-4 font-medium text-ink whitespace-nowrap">{c.name}</td>
+              <td className="px-5 py-4 text-ink-muted">{c.email}</td>
+              <td className="px-5 py-4 text-ink-muted whitespace-nowrap">{c.phone}</td>
+              <td className="px-5 py-4 text-ink-muted">{c.institution ?? "—"}</td>
+              <td className="px-5 py-4 font-mono text-ink-subtle whitespace-nowrap text-xs">
                 {formatDate(c.createdAt)}
               </td>
             </tr>
@@ -169,7 +170,7 @@ export default function AdminPage() {
   if (authLoading) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <span className="text-gray-400 text-sm">Carregando…</span>
+        <span className="text-ink-subtle text-sm">Carregando…</span>
       </div>
     );
   }
@@ -178,18 +179,18 @@ export default function AdminPage() {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-6">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Painel Admin</h1>
-          <p className="text-sm text-gray-500">Acesso restrito. Faça login com sua conta Google autorizada.</p>
+          <p className="eyebrow mb-3">Área restrita</p>
+          <h1 className="text-2xl font-bold text-ink mb-2">Painel Admin</h1>
+          <p className="text-sm text-ink-muted">Acesso restrito. Faça login com sua conta Google autorizada.</p>
         </div>
         {error && (
-          <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md px-4 py-2">
+          <p className="text-sm text-danger bg-danger-tint border border-danger rounded-md px-4 py-2">
             {error}
           </p>
         )}
         <button
           onClick={handleLogin}
-          className="flex items-center gap-3 rounded-md border border-gray-300 bg-[#fff8f2] px-5 py-3
-                     text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 transition-colors"
+          className={buttonClasses("secondary", "md", "bg-surface-0")}
         >
           {/* Google icon */}
           <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden>
@@ -209,24 +210,22 @@ export default function AdminPage() {
       {/* Cabeçalho */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Contatos recebidos</h1>
-          <p className="text-sm text-gray-500 mt-0.5">
-            Logado como <span className="font-medium text-gray-700">{user.email}</span>
+          <h1 className="text-2xl font-bold text-ink">Contatos recebidos</h1>
+          <p className="text-sm text-ink-muted mt-0.5">
+            Logado como <span className="font-medium text-ink">{user.email}</span>
           </p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={() => fetchContacts(user)}
             disabled={dataLoading}
-            className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md
-                       hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className={buttonClasses("secondary", "md", "px-4 py-2")}
           >
             {dataLoading ? "Atualizando…" : "Atualizar"}
           </button>
           <button
             onClick={handleLogout}
-            className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-md
-                       hover:bg-gray-700 transition-colors"
+            className={buttonClasses("primary", "md", "px-4 py-2")}
           >
             Sair
           </button>
@@ -235,14 +234,14 @@ export default function AdminPage() {
 
       {/* Erro */}
       {error && (
-        <div className="mb-6 rounded-md bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+        <div className="mb-6 rounded-md bg-danger-tint border border-danger px-4 py-3 text-sm text-danger">
           {error}
         </div>
       )}
 
       {/* Total */}
       {!dataLoading && contacts.length > 0 && (
-        <p className="text-xs text-gray-400 mb-3">
+        <p className="font-mono text-xs text-ink-subtle mb-3">
           {contacts.length} contato{contacts.length !== 1 ? "s" : ""} encontrado{contacts.length !== 1 ? "s" : ""}
         </p>
       )}
@@ -250,7 +249,7 @@ export default function AdminPage() {
       {/* Tabela */}
       {dataLoading ? (
         <div className="flex justify-center py-20">
-          <svg className="h-6 w-6 animate-spin text-gray-400" viewBox="0 0 24 24" fill="none">
+          <svg className="h-6 w-6 animate-spin text-accent" viewBox="0 0 24 24" fill="none">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
           </svg>

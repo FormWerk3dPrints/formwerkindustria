@@ -34,30 +34,30 @@ function createTransporter() {
 function buildHtml(contact: ContactData): string {
   const row = (label: string, value: string) => `
     <tr>
-      <td style="padding:8px 12px;font-weight:600;color:#374151;white-space:nowrap;
-                 background:#f9fafb;border-bottom:1px solid #e5e7eb;">${label}</td>
-      <td style="padding:8px 12px;color:#111827;border-bottom:1px solid #e5e7eb;">${value}</td>
+      <td style="padding:8px 12px;font-weight:600;color:#52525b;white-space:nowrap;
+                 background:#f4f4f5;border-bottom:1px solid #e4e4e7;">${label}</td>
+      <td style="padding:8px 12px;color:#111111;border-bottom:1px solid #e4e4e7;">${value}</td>
     </tr>`;
 
   return `<!DOCTYPE html>
 <html lang="pt-BR">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#f3f4f6;font-family:system-ui,sans-serif;">
-  <div style="max-width:540px;margin:40px auto;background:#fff8f2;border-radius:12px;
+<body style="margin:0;padding:0;background:#f4f4f5;font-family:Geist,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;">
+  <div style="max-width:540px;margin:40px auto;background:#ffffff;border-radius:12px;
               overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.1);">
 
     <!-- Cabeçalho -->
-    <div style="background:#111827;padding:24px 28px;">
-      <p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.08em;
-                text-transform:uppercase;color:#9ca3af;">Formwerk Industria</p>
-      <h1 style="margin:6px 0 0;font-size:20px;font-weight:700;color:#fff8f2;">
+    <div style="background:#2e2f33;border-bottom:2px solid #f26a1b;padding:24px 28px;">
+      <p style="margin:0;font-size:11px;font-weight:600;letter-spacing:.12em;font-family:'Geist Mono',ui-monospace,Menlo,monospace;
+                text-transform:uppercase;color:#b4b4bb;">FormWerk Soluções Industriais</p>
+      <h1 style="margin:6px 0 0;font-size:20px;font-weight:700;color:#f4f4f5;">
         Novo contato recebido
       </h1>
     </div>
 
     <!-- Dados -->
     <div style="padding:24px 28px;">
-      <table style="width:100%;border-collapse:collapse;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">
+      <table style="width:100%;border-collapse:collapse;border:1px solid #e4e4e7;border-radius:6px;overflow:hidden;">
         ${row("Nome", contact.name)}
         ${row("E-mail", contact.email)}
         ${row("Telefone", contact.phone)}
@@ -66,8 +66,8 @@ function buildHtml(contact: ContactData): string {
     </div>
 
     <!-- Rodapé -->
-    <div style="padding:16px 28px 24px;border-top:1px solid #f3f4f6;">
-      <p style="margin:0;font-size:12px;color:#9ca3af;">
+    <div style="padding:16px 28px 24px;border-top:1px solid #e4e4e7;">
+      <p style="margin:0;font-size:12px;color:#6b6b74;">
         Este e-mail foi gerado automaticamente pelo site. Os dados completos estão
         armazenados de forma criptografada no Firestore.
       </p>

@@ -1,21 +1,132 @@
 @import "tailwindcss";
 
+/*
+ * FormWerk Design System — tokens
+ * Fonte da verdade: o design system "FormWerk" (tokens.json).
+ * Tema claro por padrão; o tema escuro é opcional via <html data-theme="dark">.
+ */
 :root {
-  --background: #fff8f2;
-  --foreground: #171717;
+  /* Superfícies */
+  --surface-0: #ffffff;
+  --surface-100: #f4f4f5;
+  --surface-200: #e4e4e7;
+  --graphite: #2e2f33;
+  --black: #0a0a0a;
+  --steel: #808080;
+
+  /* Texto */
+  --ink: #111111;
+  --ink-muted: #52525b;
+  --ink-subtle: #6b6b74;
+  --on-black: #ffffff;
+  --on-graphite: #f4f4f5;
+  --on-graphite-muted: #b4b4bb;
+
+  /* Bordas */
+  --border: #e4e4e7;
+  --border-strong: #8a8a93;
+
+  /* O toque de laranja */
+  --accent: #f26a1b;
+  --accent-ink: #c2410c;
+  --accent-tint: #fff1e8;
+  --on-accent: #111111;
+  --focus-ring: var(--accent);
+
+  /* Estados */
+  --success: #15803d;
+  --success-tint: #f0fdf4;
+  --danger: #b91c1c;
+  --danger-tint: #fef2f2;
+
+  /* Layout */
+  --header-height: 106px;
+
+  /* Compatibilidade com nomes antigos */
+  --background: var(--surface-0);
+  --foreground: var(--ink);
+}
+
+[data-theme="dark"] {
+  --surface-0: #0f1012;
+  --surface-100: #18191c;
+  --surface-200: #26282c;
+  --graphite: #1d1e22;
+  --black: #f4f4f5;
+  --ink: #f4f4f5;
+  --ink-muted: #a1a1aa;
+  --ink-subtle: #8b8d93;
+  --on-black: #0a0a0a;
+  --on-graphite-muted: #a1a1aa;
+  --border: #2e3034;
+  --border-strong: #6a6d74;
+  --accent: #ff7a2e;
+  --accent-ink: #ff8a47;
+  --accent-tint: #2a1a10;
+  --success: #4ade80;
+  --success-tint: #10241a;
+  --danger: #f87171;
+  --danger-tint: #2a1414;
 }
 
 @theme inline {
+  --color-surface-0: var(--surface-0);
+  --color-surface-100: var(--surface-100);
+  --color-surface-200: var(--surface-200);
+  --color-graphite: var(--graphite);
+  --color-black: var(--black);
+  --color-steel: var(--steel);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-subtle: var(--ink-subtle);
+  --color-on-black: var(--on-black);
+  --color-on-graphite: var(--on-graphite);
+  --color-on-graphite-muted: var(--on-graphite-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-tint: var(--accent-tint);
+  --color-on-accent: var(--on-accent);
+  --color-focus-ring: var(--focus-ring);
+  --color-success: var(--success);
+  --color-success-tint: var(--success-tint);
+  --color-danger: var(--danger);
+  --color-danger-tint: var(--danger-tint);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 }
 
-
-
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--surface-0);
+  color: var(--ink);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--accent-tint);
+  color: var(--ink);
+}
+
+/* Sobrelinha técnica: Geist Mono maiúsculo com o traço laranja */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-subtle);
+}
+.eyebrow::before {
+  content: "";
+  width: 16px;
+  height: 2px;
+  background: var(--accent);
 }
